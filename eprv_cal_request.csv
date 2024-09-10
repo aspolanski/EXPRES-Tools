@@ -1,0 +1,4 @@
+Star,RA,Dec,eqnx,vmag,exptime,max_exptime,num_exp,cts,comment
+ThAr            ,00:00:00.00,-00:00:00.00,2000.0,1,30,30,1,2500k,Every 30 minutes
+LFC             ,00:00:00.00,-00:00:00.00,2000.0,1,15,30,1, ,Every 20 minutes for EPRV
+
