@@ -15,7 +15,7 @@ tl = TargetList(targets=targets)
 tl.make_targetlist(target_list_name='example_requests')
   ```
 
-## Spectral Registration
+## Spectral Registration:
 
 `register.py` is a self-contained routine to take reduced EXPRES spectra and find the bulk radial velocity of the star by cross-correlating with a target spectrum, in a typical case would be a LOST Solar spectrum. A new fits extension containing the shift spectra is made and a FITS file is saved. Command useage is given below with the optional diagnostic plot. 
 
