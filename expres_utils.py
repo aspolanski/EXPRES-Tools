@@ -82,7 +82,7 @@ class TargetList(object):
         target_list_header['exposure_column'] = target_list_header.exptime.astype(str)+"/"+target_list_header.max_exptime.astype(str)
         target_list_header['num_exp'] = target_list_header.num_exp.astype(str)+"x"
 
-        with open(f"{target_list_name}.tbl", "w") as f:
+        with open(f"{target_list_name}.txt", "w") as f:
             f.write('\n\n\n')
             np.savetxt(f,target_list_header[['Star','RA','Dec','eqnx','vmag','exposure_column','num_exp','cts','comment']],delimiter="  ",fmt='%s')
             f.write('\n\n\n')
