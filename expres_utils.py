@@ -4,9 +4,6 @@ import pandas as pd
 import numpy as np
 
 
-cal_block = pd.read_csv("./eprv_cal_request.csv")
-target_list_header = pd.read_csv("./target_list_header.csv")
-
 class TargetList(object):
     def __init__(self,targets=None):
 
@@ -50,7 +47,7 @@ class TargetList(object):
             self.targets = self.targets[self.targets['Star'] != star].reset_index(drop=True)
 
 
-    def make_targetlist(self,target_list_name='expres_target_list'):
+    def make_targetlist(self,target_list_name='expres_target_list',cal_block="./eprv_cal_request.csv",target_list_header="./target_list_header.csv"):
 
         """
         Function to create targetlist in a Keck/Palomar readable form.
@@ -59,7 +56,7 @@ class TargetList(object):
         df = self.targets.copy(deep=True) #make copy of working DataFrame
 
         #format Star name,RA/Dec, vmag, exposure times 
-        df.Star = df.Star.str.pad(16,side='right')
+        df.Star = df.Star.str.pad(14,side='right')
         df.RA = df.RA.str.replace(":"," ")
         df.Dec = df.Dec.str.replace(":"," ")
         df.vmag = 'vmag='+df.vmag.astype(str)
@@ -69,14 +66,16 @@ class TargetList(object):
         df.comment = df.comment.fillna('')
 
         #same for calibrations block and header
-        cal_block.Star = cal_block.Star.str.pad(16,side='right')
+        cal_block = pd.read_csv(f"{cal_block}")
+        cal_block.Star = cal_block.Star.str.pad(14,side='right')
         cal_block.RA = cal_block.RA.str.replace(":"," ")
         cal_block.Dec = cal_block.Dec.str.replace(":"," ")
         cal_block.vmag = 'vmag='+cal_block.vmag.astype(str)
         cal_block['exposure_column'] = cal_block.exptime.astype(str)+"/"+cal_block.max_exptime.astype(str)
         cal_block['num_exp'] = cal_block.num_exp.astype(str)+"x"
-
-        target_list_header.Star = target_list_header.Star.str.pad(16,side='right')
+        
+        target_list_header = pd.read_csv(f"{target_list_header}")
+        target_list_header.Star = target_list_header.Star.str.pad(14,side='right')
         target_list_header.RA = target_list_header.RA.str.replace(":"," ")
         target_list_header.Dec = target_list_header.Dec.str.replace(":"," ")
         target_list_header.vmag = 'vmag='+target_list_header.vmag.astype(str)
