@@ -30,3 +30,34 @@ options:
   ```
 
 <img src="https://github.com/aspolanski/EXPRES-Tools/blob/main/HD19994_shift_plot.png" width="650" height="400" />
+
+
+## Color Correction:
+
+The `color_correction.py` routine corrects EXPRES spectra for chromatic variations due to changes in airmass. Especially useful for Rossiter-McLaughlin datasets where the CCF contrast is highly
+sensitive to such effects. In summary, each spectrum is compared to the spectrum of a rapidly rotating B star, which estimates the throughput of the optical system. The differences are corrected for using a high order polynomial. 
+
+```
+python color_correction.py -h
+options:
+  -h, --help            show this help message and exit
+  --in_dir IN_DIR       The input FITS file.
+  --out_dir OUT_DIR     Directory of the registered spectra.
+  --plot IF_PLOT        Make plots (not implemented)
+  --target-temp TARGET_TEMP
+                        Effective temperature of the target star (K)
+```
+
+## CCF Fitting Window:
+
+`ccf_width.py` takes the coadded EXPRES CCF of one or more exposures, fits the CCF function and returns a recommended fitting window to derive the RVs (default is 1.5 times the FWHM).
+
+```
+python ccf_width.py -h
+options:
+  -h, --help            show this help message and exit
+  --ccf_dir CCF_DIR     Directory containing CCF fits files. (format = /*/*/)
+  --fwhm_factor FWHM_FACTOR
+                        Fraction of the FWHM to use as the fitting window.
+  --plot                Generate plots.
+```
